@@ -439,3 +439,4 @@ https://templatemo.com/tm-595-3d-coverflow
         updateCoverflow();
         container.focus();
         startAutoplay();
+
