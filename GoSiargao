@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoSiargao</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background: linear-gradient(to bottom, #c5dff0, #8fa5c5);
+    color:#222;
+}
+
+/* ================= NAVBAR ================= */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 70px;
+    background:#9fb5ca;
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    transition:0.3s;
+}
+
+nav.scrolled{
+    background:#829cb1;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:bold;
+    font-size:20px;
+    pointer-events:none;
+}
+
+.logo svg{
+    width:28px;
+    height:28px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:35px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:600;
+    position:relative;
+}
+
+nav a.active::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:100%;
+    height:3px;
+    background:#384569;
+    border-radius:10px;
+}
+
+/* ================= HERO ================= */
+.hero{
+    display:flex;
+    justify-content:center;
+    padding:160px 20px 80px;
+}
+
+.hero-box{
+    background:white;
+    width:75%;
+    text-align:center;
+    padding:60px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+
+.hero-box h2{
+    font-size:46px;
+    margin-bottom:20px;
+    color:#283f4e;
+}
+
+.hero-box p{
+    font-size:17px;
+    margin-bottom:35px;
+    color:#5d7486;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+}
+
+.btn{
+    padding:14px 30px;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+    color:white;
+}
+
+.btn-start{ background:#537799; }
+.btn-blog{ background:#92a9be; }
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* ================= SLIDER ================= */
+.slider-section{
+    padding:80px 0;
+    display:flex;
+    justify-content:center;
+}
+
+.slider-wrapper{
+    position:relative;
+    width:75%;
+    overflow:hidden;
+}
+
+.slider{
+    display:flex;
+    transition:transform 0.5s ease-in-out;
+}
+
+.slide{
+    min-width:100%;
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+.slide img{
+    width:100%;
+    height:380px;
+    object-fit:cover;
+}
+
+.slide-content{
+    padding:40px;
+    text-align:center;
+}
+
+.slide-content h2{
+    margin-bottom:15px;
+    color:#283f4e;
+}
+
+.slide-content p{
+    color:#586d80;
+    line-height:1.6;
+}
+
+.prev, .next{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:#233d52;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+    border-radius:50%;
+}
+
+.prev{ left:10px; }
+.next{ right:10px; }
+
+/* ================= BLOG ================= */
+.blog-preview{
+    width:75%;
+    margin:0 auto 100px;
+    padding:60px 0;
+    display:flex;
+    gap:25px;
+}
+
+.blog-card{
+    flex:1;
+    display:flex;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.blog-card:hover{
+    transform:translateY(-5px);
+}
+
+.blog-card img{
+    width:45%;
+    object-fit:cover;
+}
+
+.blog-card div{
+    padding:20px;
+}
+
+.blog-card h4{
+    margin-bottom:10px;
+    color:#6a7697;
+}
+
+.blog-card p{
+    font-size:14px;
+    line-height:1.6;
+    color:#6d7794;
+}
+
+/* ================= FOOTER ================= */
+footer{
+    background:#2a3044;
+    color:white;
+    text-align:center;
+    padding:35px;
+}
+
+footer p{
+    margin-bottom:8px;
+    opacity:0.85;
+}
+
+footer small{
+    opacity:0.6;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:900px){
+    .blog-preview{
+        flex-direction:column;
+    }
+    .blog-card{
+        flex-direction:column;
+    }
+    .blog-card img{
+        width:100%;
+        height:200px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <div class="logo">
+        <!-- EXACT SVG -->
+        <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#000000;} </style> <g> <path class="st0" d="M164.681,127.445c21.356,0,38.689-17.324,38.689-38.688c0-21.366-17.333-38.689-38.689-38.689 c-21.374,0-38.698,17.324-38.698,38.689C125.983,110.121,143.307,127.445,164.681,127.445z"></path> <path class="st0" d="M272.935,238.2l-25.491-41.199c-23.587-36.701-40.192-49.816-80.15-51.019 c-27.451-0.822-75.502,8.55-87.626,76.295L65.295,329.915c-0.392,8.308,6.02,15.363,14.337,15.755 c8.297,0.402,15.345-6.011,15.746-14.318l17.128-77.985l7.748,239.003c0,10.846,8.774,19.629,19.62,19.629 c10.846,0,19.629-8.784,19.629-19.629l7.794-138.318l7.794,138.318c0,10.846,8.792,19.629,19.629,19.629 c10.846,0,19.629-8.784,19.629-19.629l7.748-247.525l21.664,19.545c1.661,1.83,3.434,3.38,5.236,4.733 c3.388,4.05,8.485,6.646,14.188,6.646l15.662-0.738c-0.037-4.274-0.066-8.596-0.066-13.039c0-8.037,0.084-15.821,0.233-23.4 L272.935,238.2z"></path> <path class="st0" d="M370.698,0c-12.012,0-76.034,31.296-76.034,261.993c0,161.644,27.414,205.448,45.764,241.27 c1.512,2.95,5.246,8.737,11.36,8.737h37.811c6.114,0,9.847-5.787,11.359-8.737c18.35-35.823,45.764-79.627,45.764-241.27 C446.723,31.296,382.692,0,370.698,0z"></path> </g> </g></svg>
+        </svg>
+        GoSiargao
+    </div>
+
+    <ul>
+        <li><a href="#hero" class="nav-link">HOME</a></li>
+        <li><a href="#explore-section" class="nav-link">EXPLORE</a></li>
+        <li><a href="#blog-section" class="nav-link">BLOG</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+    <div class="hero-box">
+        <h2>Explore the World Like Never Before</h2>
+        <p>Experience Mindanao’s hidden mountains, untouched beaches, and vibrant culture in one unforgettable journey.</p>
+        <div class="buttons">
+            <a href="#explore-section" class="btn btn-start">START YOUR JOURNEY</a>
+            <a href="#blog-section" class="btn btn-blog">READ BLOG</a>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDER -->
+<section id="explore-section" class="slider-section">
+    <div class="slider-wrapper">
+        <div class="slider">
+            <div class="slide">
+                <img src="https://i.pinimg.com/1200x/5b/ce/41/5bce41ab96aca8c8ad88110b3dbfe08b.jpg">
+                <div class="slide-content">
+                    <h2>Majestic Mountains</h2>
+                    <p>Climb scenic peaks and experience breathtaking sunrise views.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://i.pinimg.com/1200x/f6/a0/e3/f6a0e353d7f79309c2d82668e5f2ef12.jpg">
+                <div class="slide-content">
+                    <h2>Hidden Beaches</h2>
+                    <p>Relax on peaceful shores with crystal clear waters.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://i.pinimg.com/1200x/ec/d7/64/ecd764aa52569ab0611b74563873c0de.jpg">
+                <div class="slide-content">
+                    <h2>Urban Culture</h2>
+                    <p>Discover food, art, and nightlife across Mindanao.</p>
+                </div>
+            </div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog-section" class="blog-preview">
+    <div class="blog-card">
+        <img src="https://i.pinimg.com/1200x/63/87/76/6387767053fe552c00cb2939e128e908.jpg">
+        <div>
+            <h4>Hidden Waterfalls</h4>
+            <p>Complete travel guide to secret waterfall locations and tips.</p>
+        </div>
+    </div>
+    <div class="blog-card">
+        <img src="https://i.pinimg.com/1200x/21/53/2c/21532c8d0dbe1038f2f0d3b119384965.jpg">
+        <div>
+            <h4>Night City Adventures</h4>
+            <p>Explore night markets and glowing city views.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>GoSiargao © 2026 | All rights reserve. </p>
+    <small>Discover • Explore • Experience</small>
+</footer>
+
+<script>
+// SLIDER
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+let currentIndex = 0;
+
+document.querySelector('.next').onclick = () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+};
+
+document.querySelector('.prev').onclick = () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+};
+
+// SCROLL ACTIVE NAV
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-link");
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+
+    navbar.classList.toggle("scrolled", window.scrollY > 50);
+
+    let current = "";
+
+    sections.forEach(section => {
+        const top = section.offsetTop - 200;
+        const height = section.clientHeight;
+
+        if(scrollY >= top && scrollY < top + height){
+            current = section.id;
+        }
+    });
+
+    navLinks.forEach(link=>{
+        link.classList.remove("active");
+        if(link.getAttribute("href") === "#" + current){
+            link.classList.add("active");
+        }
+    });
+});
+</script>
+
+</body>
+</html>
