@@ -33,7 +33,7 @@ public class ProductSystem {
             // Display Products
             System.out.println("\n===== PRODUCT MENU =====");
             for (int i = 0; i < products.length; i++) {
-                System.out.println((i + 1) + ". " + products[i] + " - ₱" + prices[i]);
+                System.out.println((i + 1) + ". " + products[i] + " - PHP" + prices[i]);
             }
 
             int choice;
@@ -56,13 +56,13 @@ public class ProductSystem {
             // Compute Total
             double total = prices[choice - 1] * quantity;
 
-            System.out.println("Total Amount: ₱" + total);
+            System.out.println("Total Amount: PHP" + total);
 
             // Payment
             double money;
 
             while (true) {
-                System.out.print("Enter Payment: ₱");
+                System.out.print("Enter Payment: PHP");
                 money = sc.nextDouble();
 
                 if (money >= total) {
@@ -74,20 +74,21 @@ public class ProductSystem {
 
             // Change
             double change = money - total;
+            
 
             // Print Receipt
             System.out.println("\n===== RECEIPT =====");
             System.out.println("Product: " + products[choice - 1]);
-            System.out.println("Price: ₱" + prices[choice - 1]);
+            System.out.println("Price: PHP" + prices[choice - 1]);
             System.out.println("Quantity: " + quantity);
-            System.out.println("Total: ₱" + total);
-            System.out.println("Payment: ₱" + money);
-            System.out.println("Change: ₱" + change);
+            System.out.println("Total: PHP" + total);
+            System.out.println("Payment: PHP" + money);
+            System.out.println("Change: PHP" + change);
             System.out.println("===================");
 
             sc.nextLine(); // clear buffer
 
-            System.out.print("\nBack to Start? (yes/no): ");
+            System.out.print("\nOrder Again? (yes/no): ");
             String again = sc.nextLine();
 
             if (!again.equalsIgnoreCase("yes")) {
@@ -95,8 +96,7 @@ public class ProductSystem {
             }
         }
 
-        System.out.println("\nProgram Finished.");
+        System.out.println("\nThank you for ordering ;).");
         sc.close();
     }
 }
-
